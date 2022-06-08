@@ -1,6 +1,6 @@
 create table if not exists genres (
 	genreid serial primary key,
-	name varchar(60) not null
+	name varchar(60) unique not null
 );
 create table if not exists singers (
 	singerid serial primary key,
@@ -23,14 +23,17 @@ create table if not exists singersalbums (
 );
 create table if not exists tracks (
 	trackid serial primary key,
-	name varchar(60) not null,
+	name varchar(60) unique not null,
 	duration integer not null,
 	albumid integer not null references albums(albumid)
 );
 create table if not exists collections (
 	collectionid serial primary key,
 	name varchar(60) not null,
-	year integer not null,
-	albumid integer not null references albums(albumid),
-	trackid integer references tracks(trackid)
+	year integer not null
+);
+create table if not exists collectionstracks (
+	trackid integer references tracks(trackid),
+	collectionid integer references collections(collectionid),
+	constraint collectionpk primary key (trackid, collectionid)
 );
