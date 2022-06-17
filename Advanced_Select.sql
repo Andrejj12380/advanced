@@ -1,4 +1,4 @@
--- количество исполнителей в каждом жанре;
+-- количество исполнителей в каждом жанре  ;
 select genreid, count(*) from singersgenres s
 group by genreid
 order by genreid;
