@@ -17,7 +17,12 @@ group by title;
 select distinct singer_name from singers s  
 join singersalbums s3 on s.singerid = s3.singerid
 join albums a on s3.albumid = a.albumid
-where year != 2020;
+where singer_name not in (
+select distinct singer_name from singers s  
+join singersalbums s3 on s.singerid = s3.singerid
+join albums a on s3.albumid = a.albumid
+where year = 2020
+);
 
 -- названия сборников, в которых присутствует конкретный исполнитель;
 select distinct col_name from collections c 
